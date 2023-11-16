@@ -9,10 +9,10 @@
     <h1>Success</h1>
     <p>{{ message }}</p>
 
-    {% if items %}
+    {% if filtered_items %}
         <h2>Fetched Weather Data:</h2>
         <ul>
-            {% for item in items %}
+            {% for item in filtered_items %}
                 <li>
                     <strong>Category:</strong> {{ item.category|default:'' }},
                     <strong>Forecast Date:</strong> {{ item.fcstDate|default:'' }},
