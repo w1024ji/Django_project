@@ -36,6 +36,8 @@ def fetch_and_save_weather(request):
 
     # print(base_time) # 성공
 
+    # nx, ny는 덕성여대로 위치 고정
+    # numOfRows=40와 pageNo=1로 해야 한 페이지에 전체 데이터가 나온다
     params = {
         'numOfRows': 40,
         'dataType': 'JSON',
@@ -46,20 +48,18 @@ def fetch_and_save_weather(request):
         'ny': 128,
     }
 
-    
+    # services.py의 get_seather_data()를 가져와 딕셔너리 형태로 받기
     response = get_weather_data(api_url, api_key, params)
 
     # print(response) # 성공
 
-    
     if response and 'response' in response and 'body' in response['response']:
-        
+        # 데이터에 접근하려면 ['response']['body']['items']['item']안쪽으로 접근해야 한다
         items = response['response']['body']['items']['item']
-
-       
-
+        
         if items:
             for item in items:
+                # 인스턴스 만들고 데베에 추가
                 Weather.objects.create(
                     base_date=item.get('baseDate', ''),
                     base_time=item.get('baseTime', ''),
@@ -71,13 +71,25 @@ def fetch_and_save_weather(request):
                     ny=item.get('ny', 0),
                 )
 
-            
+            # T1H(기온), SKY(하늘상태), PTY(강수형태)의 데이터를 필터링한다
             desired_categories = {'T1H', 'SKY', 'PTY'}
             filtered_items = [item for item in items if item.get('category') in desired_categories]
+            # print(filtered_items) # 성공
 
-        # print(filtered_items) # 성공
+            # 날짜와 시간을 기준으로 T1H, SKY, PTY를 묶기
+            organized_items = {}
+            for item in filtered_items:
+                fcst_date = item['fcstDate']
+                fcst_time = item['fcstTime']
+                key = f"{fcst_date}_{fcst_time}"
+                if key not in organized_items:
+                    organized_items[key] = []
+                organized_items[key].append({'category': item['category'], 'fcstValue': item['fcstValue']})
+            # print(organized_items) # 성공
 
 
-        return render(request, 'success.html', {'message': 'Data fetched and saved successfully!', 'filtered_items': filtered_items})
+        return render(request, 'success.html', 
+                      {'message': 'Data fetched and saved successfully!', 'organized_items': organized_items}
+                      )
     
     return render(request, 'error.html', {'message': 'Failed to fetch data from the API.'})
