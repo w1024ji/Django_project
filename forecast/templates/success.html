@@ -1,0 +1,45 @@
+<!-- forecast/templates/success.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Success</title>
+</head>
+<body>
+    <h1>Success</h1>
+    <p>{{ message }}</p>
+
+    {% if organized_items %}
+        <h2>날씨 데이터:</h2>
+        {% for key, group in organized_items.items %}
+            <h3>날짜_시간: {{ key }}</h3>
+            <ul>
+                {% for item in group %}
+                    <li>
+                        {% if item.category|default:'' == 'T1H' %} 기온: 
+                            {{ item.fcstValue|default:'' }} 도
+                        {% elif item.category|default:'' == 'SKY' %} 하늘상태:
+                            {% if item.fsctValue|default:'' == '1' %} 맑음
+                            {% elif item.fsctValue|default:'' == '3' %} 구름 많음
+                            {% else %} 흐림
+                            {% endif %}
+                        {% else %} 강수형태: 
+                            {% if item.fsctValue|default:'' == '0' %} 없음
+                            {% elif item.fsctValue|default:'' == '1' %} 비
+                            {% elif item.fsctValue|default:'' == '2' %} 비or눈
+                            {% elif item.fsctValue|default:'' == '3' %} 눈
+                            {% elif item.fsctValue|default:'' == '5' %} 빗방울
+                            {% elif item.fsctValue|default:'' == '6' %} 빗방울or눈날림
+                            {% else %} 눈날림
+                            {% endif %}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    {% else %}
+        <p>No organized weather data.</p>
+    {% endif %}
+</body>
+</html>
+
