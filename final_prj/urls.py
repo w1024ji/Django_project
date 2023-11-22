@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('forecast/', include('forecast.urls')),
     path('user/', include('user.urls')),
-    path('user/', include('django.contrib.auth.urls')),  # 로그인, 로그아웃에 대한 패턴 추가
+
     # Add other app URLs as needed
 ]
 
