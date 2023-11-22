@@ -1,23 +1,27 @@
-{% extends 'base.html' %}
-{% block content %}
-
-<h1>로그인</h1>
-<form method="post" action="{% url 'user:login' %}">
-  {% csrf_token %}
-  {% include 'user/form_errors.html' %}
-  <div>
-    <label>닉네임</label>
-    <input type="text" name="nickname" id="nickname">
-  </div>
-  <div>
-    <label>아이디</label>
-    <input type="text" name="username" id="username">
-  </div>
-  <div>
-    <label>비밀번호</label>
-    <input type="text" name="password" id="password">
-  </div>
-  <button type="submit">로그인</button>
+<form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    <p>아이디</p>
+    <input type="text" placeholder="아이디를 입력해주세요" name="username">
+    <br>
+    <p>비밀번호</p>
+    <input type="text" placeholder="비밀번호를 입력해주세요" name="password">
+    <br>
+    <input type="submit" value="로그인">
 </form>
 
-{% endblock %}1>
+<p>아직 회원이 아니신가요? <a href="{% url 'signup' %}">회원가입</a></p>
+
+{% if error %}
+    <script>
+        function showAlert(message) {
+            alert(message);
+        }
+
+        showAlert("{{ error }}");
+
+        // 로그인 에러가 발생하면 1초 후에 로그인 페이지로 리디렉션
+        setTimeout(function() {
+            window.location.href = "{% url 'login' %}";
+        }, 1000);
+    </script>
+{% endif %}
