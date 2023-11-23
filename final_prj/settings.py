@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'post',
     'chat',
     'user',
+
 ]
 
 MIDDLEWARE = [
