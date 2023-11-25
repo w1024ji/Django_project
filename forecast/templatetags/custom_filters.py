@@ -6,7 +6,7 @@ register = template.Library()
 
 @register.simple_tag
 def generate_lottie_animation(animation_name, container_id):
-    json_path = f"{settings.STATIC_URL}forecast/animations/{animation_name}.json"
+    json_path = f"{settings.STATIC_URL}animations/{animation_name}.json"
     return format_html(
         '<div id="{container_id}" class="lottie-animation"></div>'
         '<script>'

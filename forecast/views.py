@@ -102,4 +102,4 @@ def fetch_and_save_weather(request):
             'earliest_date': earliest_date
         })
     
-    return render(request, 'error.html', {'message': 'Failed to fetch data from the API.'})
+    return render(request, 'forecast/error.html', {'message': 'Failed to fetch data from the API.'})

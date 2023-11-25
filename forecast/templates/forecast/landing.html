@@ -5,20 +5,21 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Landing</title>
+    <title>날씨일기-main</title>
 
-    <link rel="stylesheet" type="text/css" href="{% static 'forecast/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/forecast/main.css' %}">
     <!-- Include Lottie library from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
 
   </head>
   <body>
-    <div class="main-container">
+    <div class="container">
     
     <!-- Nav Bar -->
     <div class="navbar">
-      <a href="#" class="icon" onclick="toggleNavbar()">&#9776;</a>
-      <a class="logo">날씨일기</a>
+      <a href="#" onclick="toggleNavbar()"><img src="{% static 'images/menu.png' %}" class="icon" alt="메뉴버튼"></a>
+      <a href=""><img src="{% static 'images/logo.png' %}" class="logo" alt="로고"></a>
+      <a href=""><img src="{% static 'images/login.png' %}" class="로그인" alt="로그인/마이페이지"></a>
     </div>
 
     <!-- Big box -->
@@ -170,7 +171,7 @@
     </div>
 
     <!-- Footer -->
-    <footer>© 인프 7조. All rights reserved.</footer>
+    <footer><p>© 인프 7조. All rights reserved.</p></footer>
 
     <script>
       function toggleNavbar() {
