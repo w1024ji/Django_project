@@ -1,0 +1,113 @@
+<!-- forecast/templates/forecast/poll_detail.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Polls</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    if (typeof jQuery == 'undefined') {
+      console.error('jQuery is not loaded')
+    } else {
+      console.log('jQuery is loaded')
+    }
+
+    $(function () {
+      var hasVoted = false; // Variable to track if the user has voted
+    
+      updateChartWidths();  // Call the function initially
+      console.log('Document ready')
+    
+      $('.choice').click(function () {
+        console.log('Choice clicked')
+        var choiceId = $(this).data('choice-id')
+        console.log('Choice ID:', choiceId)
+    
+        $.ajax({
+          type: 'POST',
+          url: "{% url 'vote' %}",
+          data: { 'choice_id': choiceId, csrfmiddlewaretoken: '{{ csrf_token }}' },
+          success: function (data) {
+            console.log('AJAX success:', data)
+    
+            // Update the vote count on the page
+            var choiceElement = $('.choice[data-choice-id=' + choiceId + ']');
+            choiceElement.find('.vote-count').text(data.votes);
+    
+            // Check if the user has already voted
+            if (!hasVoted) {
+              // If it's the first vote, update color for all charts
+              $('.chart').css('background-color', '#00ff00'); // Color B for all charts
+              hasVoted = true; // Set the flag to true
+            }
+    
+            // Update chart widths based on the new vote counts
+            updateChartWidths();
+          }
+        })
+      });
+    
+      function updateChartWidths() {
+        var totalVotes = 0;
+        $('.choice').each(function () {
+          totalVotes += parseInt($(this).find('.vote-count').text());
+        });
+    
+        $('.choice').each(function () {
+          var votes = parseInt($(this).find('.vote-count').text());
+          var percentage = (votes / totalVotes) * 100;
+          $(this).find('.chart').css('width', percentage + '%');
+        });
+      }
+    });
+    
+  </script>
+  <style>
+    .container {
+      display: flex;
+      justify-content: space-evenly; /* Adjust as needed */
+    }
+  
+    .choice {
+      margin-bottom: 20px;
+      overflow: hidden;
+      width: 33.33%;
+      max-width: 400px; /* Set your preferred max-width */
+      box-sizing: border-box;
+    }
+  
+    .chart {
+      height: 20px;
+      background-color: #3498db; /* Color A - Default color */
+      transition: width 0.5s, background-color 0.5s; /* Add transition for a smoother effect */
+    }
+  
+    .choice.selected .chart {
+      background-color: #00ff00; /* Color B - Color after selected, here it's green */
+    }
+  
+    .vote-count {
+      margin-left: 10px;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+  <h1>{{ poll.question }}</h1>
+
+  <div class="container">
+    {% for choice in poll.choice_set.all %}
+      <div class="choice" data-choice-id="{{ choice.id }}">
+
+        <span>{{ choice.choice_text }}</span>
+        <div class="vote-count">{{ choice.votes }}</div>
+        <div class="chart"></div>
+        
+      </div>
+    {% endfor %}
+  </div>
+
+</body>
+</html>

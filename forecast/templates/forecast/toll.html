@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .poll-container {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .option {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .option input {
+      margin-right: 10px;
+    }
+    #voteBtn {
+      display: block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="poll-container">
+  <div class="option">
+    <input type="radio" name="vote" value="option1" id="option1">
+    <label for="option1">Option 1</label>
+  </div>
+  <div class="option">
+    <input type="radio" name="vote" value="option2" id="option2">
+    <label for="option2">Option 2</label>
+  </div>
+  <div class="option">
+    <input type="radio" name="vote" value="option3" id="option3">
+    <label for="option3">Option 3</label>
+  </div>
+  <button id="voteBtn">Vote</button>
+</div>
+
+<script>
+  document.getElementById('voteBtn').addEventListener('click', function() {
+    const selectedOption = document.querySelector('input[name="vote"]:checked');
+    
+    if (selectedOption) {
+      alert(`You voted for ${selectedOption.value}`);
+      // You can send the vote data to the server for processing here
+    } else {
+      alert('Please select an option before voting.');
+    }
+  });
+</script>
+
+</body>
+</html>

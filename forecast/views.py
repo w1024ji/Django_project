@@ -82,7 +82,7 @@ def fetch_and_save_weather(request):
                 organized_items[key].append({'category': item['category'], 'fcstValue': item['fcstValue']})
             
 
-            # Get the earliest date for landing2.html
+            # Get the earliest date for landing.html
             earliest_date_key = min(organized_items.keys())
             earliest_date_group = organized_items[earliest_date_key]
 
@@ -95,7 +95,7 @@ def fetch_and_save_weather(request):
             }
             
 
-        # Render landing2.html with the necessary data
+        # Render landing.html with the necessary data
         return render(request, 'forecast/landing.html', {
             'message': 'Data fetched and saved successfully!',
             'organized_items': organized_items,
@@ -103,3 +103,30 @@ def fetch_and_save_weather(request):
         })
     
     return render(request, 'error.html', {'message': 'Failed to fetch data from the API.'})
+
+
+
+from django.shortcuts import get_object_or_404
+from .models import Poll
+
+def poll_detail(request, poll_id):
+    poll = get_object_or_404(Poll, pk=poll_id)
+    return render(request, 'forecast/poll_detail.html', {'poll': poll})
+
+
+#  View for Voting
+
+from django.http import JsonResponse
+from .models import Choice
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def vote(request):
+    if request.method == 'POST':
+        choice_id = request.POST.get('choice_id')
+        choice = get_object_or_404(Choice, pk=choice_id)
+        choice.votes += 1
+        choice.save()
+        return JsonResponse({'votes': choice.votes})
+    # Handle other HTTP methods if needed
+    return JsonResponse({'error': 'Invalid request method'})
