@@ -1,0 +1,39 @@
+body {
+    background-color: #badce3;
+}
+
+
+#chatroom_box {
+/*    채팅칭 및 form을 감싸는 영역*/
+    margin: 10px;
+    padding: 10px;
+}
+
+
+.chat-log-container {
+    /*메시지 오가는 영역. */
+    border: 3px solid black;
+    padding-top: 13px;
+    min-height: 500px;
+    border-radius: 5px;
+    /*height: 400px;*/
+    /*overflow: auto;*/
+    /*overflow-y: hidden;*/
+    /*overflow-y: scroll;*/
+    -ms-overflow-style: none;
+}
+
+.chat-log-container::-webkit-scrollbar {
+    display: none;
+}
+
+
+input[type=text] {
+}
+button[type=button] {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    background-color: #ced4da;
+    border-color: #ced4da;
+    color: black;
+}
