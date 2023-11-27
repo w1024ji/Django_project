@@ -1,10 +1,13 @@
 # forecast/views.py
 
-from django.shortcuts import render
-from .services import get_weather_data
-from .models import Weather
-import os
+from django.shortcuts import render, get_object_or_404
+from .models import Weather, Poll, Choice
 from datetime import datetime, timedelta, date
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+from .services import get_weather_data
+import os
 
 
 def fetch_and_save_weather(request):
@@ -82,7 +85,7 @@ def fetch_and_save_weather(request):
                 organized_items[key].append({'category': item['category'], 'fcstValue': item['fcstValue']})
             
 
-            # Get the earliest date for landing2.html
+            # Get the earliest date for landing.html
             earliest_date_key = min(organized_items.keys())
             earliest_date_group = organized_items[earliest_date_key]
 
@@ -95,11 +98,38 @@ def fetch_and_save_weather(request):
             }
             
 
-        # Render landing2.html with the necessary data
+        # Poll 모델에서 가져오기
+        poll = Poll.objects.first()  # 원한다면 수정 가능
+        
         return render(request, 'forecast/landing.html', {
             'message': 'Data fetched and saved successfully!',
             'organized_items': organized_items,
-            'earliest_date': earliest_date
-        })
+            'earliest_date': earliest_date,
+            'poll': poll,  
+        }) 
     
-    return render(request, 'forecast/error.html', {'message': 'Failed to fetch data from the API.'})
+    return render(request, 'error.html', {'message': 'Failed to fetch data from the API.'})
+
+
+@login_required
+@csrf_exempt
+def vote(request):
+    if request.method == 'POST':
+        choice_id = request.POST.get('choice_id')
+        choice = get_object_or_404(Choice, pk=choice_id)
+
+        user = request.user
+
+        # 투표한 사용자라면
+        if choice.voters.filter(pk=user.pk).exists():
+            return JsonResponse({'error': 'User has already voted'})
+        
+        # 투표 더하기
+        choice.votes += 1
+        choice.voters.add(user)
+        choice.save()
+
+        return JsonResponse({'votes': choice.votes})
+    
+    
+    return JsonResponse({'error': 'Invalid request method. request.method != POST'})

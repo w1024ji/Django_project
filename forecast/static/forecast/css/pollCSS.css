@@ -1,0 +1,48 @@
+/* forecast/static/forecast/css/pollCSS.css */
+
+.poll_container{
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+
+.poll-question {
+    text-align: center; /* Optional: Center the question */
+    margin-bottom: 20px;
+}
+.poll_container {
+    display: flex;
+    flex-direction: column; /* Change to column layout */
+    align-items: center; /* Optional: Center the items horizontally */
+}
+
+.choice {
+    margin-bottom: 20px;
+    overflow: hidden;
+    max-width: 400px; /* Set your preferred max-width */
+    box-sizing: border-box;
+    width: 100%; /* Make the choices take the full width */
+}
+  
+  .chart {
+    height: 20px;
+    background-color: #3498db; /* Color A - Default color */
+    transition: width 0.5s, background-color 0.5s; /* Add transition for a smoother effect */
+  }
+  
+  .choice.selected .chart {
+    background-color: #00ff00; /* Color B - Color after selected, here it's green */
+  }
+  
+  .percentage-count {
+    margin-left: 10px;
+    float: right;
+  }
+  #percentage.percentage-count{
+    margin-left: 10px;
+    float: right;
+  }
+  
+  
+/* .vote-count {
+  visibility: hidden;
+} */

@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>날씨일기-main</title>
@@ -11,6 +10,13 @@
     <!-- Include Lottie library from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
 
+    <!-- Poll -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    var baseUrl = "{% url 'vote' %}";
+  </script>
+  <script src="{% static 'forecast/js/pollJS.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'forecast/css/pollCSS.css' %}">
   </head>
   <body>
     <div class="container">
@@ -21,6 +27,18 @@
       <a href=""><img src="{% static 'images/logo.png' %}" class="logo" alt="로고"></a>
       <a href=""><img src="{% static 'images/login.png' %}" class="로그인" alt="로그인/마이페이지"></a>
     </div>
+
+
+
+    <p>hello my name is </p>
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}!</p>
+        <p><a href="{% url 'logout' %}">Logout</a></p>
+    {% else %}
+        <p>Welcome to the landing page! Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.</p>
+    {% endif %}
+
+
 
     <!-- Big box -->
     {% if earliest_date %}
@@ -170,11 +188,29 @@
     </div>
     </div>
 
+
+    <!-- VOTE -->
+    <div class="poll_container">
+      <h1 class="poll-question">{{ poll.question }}</h1>
+  
+      {% for choice in poll.choice_set.all %}
+          <div class="choice" data-choice-id="{{ choice.id }}">
+              <span>{{ choice.choice_text }}</span>
+              <div class="vote-count" style="visibility: hidden;">{{ choice.votes }}</div>
+              <div class="percentage-count" id="percentage">{{ choice.votes }}</div>
+              <div class="chart"></div>
+          </div>
+      {% endfor %}
+  
+    </div>
+
+
     <!-- Footer -->
     <footer><p>© 인프 7조. All rights reserved.</p></footer>
 
     <script>
-      function toggleNavbar() {
+      // nav 눌렀을 때: 구현 안 함
+      function toggleNavbar() { 
         var x = document.querySelector('.navbar a:not(.icon)')
         x.style.display = x.style.display === 'block' ? 'none' : 'block'
       }
