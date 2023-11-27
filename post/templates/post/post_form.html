@@ -9,16 +9,14 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
-            {% for field in form.visible_fields %}
                 <tr>
-                    <td>{{ field.label_tag }}</td>
+                    <td>{{ form.as_p }}</td>
                     <td>
                         {% for char in field.value %}
                             <input type="text" name="{{ field.name }}[]" value="{{ char }}" maxlength="1" style="width: 20px; text-align: center;">
                         {% endfor %}
                     </td>
                 </tr>
-            {% endfor %}
         </table>
         <button type="submit">Submit</button>
     </form>

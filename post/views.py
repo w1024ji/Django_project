@@ -5,6 +5,7 @@ from .models import Post, Weather
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.core.exceptions import PermissionDenied
+from django import forms
 
 
 # Create your views here.
@@ -17,19 +18,20 @@ class PostDetail(DetailView):
 
 class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'head_image', 'file_upload']    
+    fields = ['title', 'content', 'head_image', 'weather']
 
     def form_valid(self, form):
         current_user = self.request.user
         if current_user.is_authenticated:
             form.instance.author = current_user
-            return super(PostCreate, self).from_valid(form)
+            form.fields['weather'].queryset = Weather.objects.all()  # 여기서 queryset 설정
+            return super(PostCreate, self).form_valid(form)
         else:
             return redirect('/post')
     
 class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
-    fields = ['title', 'content', 'head_image', 'file_upload']
+    fields = ['title', 'content', 'head_image', 'weather']
     template_name = 'post/post_update_form.html'
     
     def dispatch(self, request, *args, **kwargs):
