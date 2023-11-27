@@ -71,3 +71,8 @@ def login(request):
 
     # logout으로 GET 요청이 들어왔을 때, 로그인 화면을 띄워준다.
     # return render(request, 'user/login.html')
+
+# 로그 아웃
+def logout(request):
+    auth.logout(request)
+    return redirect('/')

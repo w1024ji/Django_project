@@ -1,6 +1,8 @@
 # forecast/models.py
 
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class Weather(models.Model):
     base_date = models.CharField(max_length=8, default='20231116')
@@ -13,3 +15,11 @@ class Weather(models.Model):
     ny = models.IntegerField(default=0)
 
     
+class Poll(models.Model):
+    question = models.CharField(max_length=200)
+
+class Choice(models.Model):
+    poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+    voters = models.ManyToManyField(User, blank=True)
