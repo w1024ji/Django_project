@@ -23,7 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('forecast.urls')),
     path('user/', include('user.urls')),
-    path('post/', include('post.urls')),
+
+
+
+    path('post/', include('post.urls'))
 ]
 
 if settings.DEBUG:
