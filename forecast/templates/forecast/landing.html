@@ -1,0 +1,184 @@
+{% load static custom_filters %}
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>날씨일기-main</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/forecast/main.css' %}">
+    <!-- Include Lottie library from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+
+  </head>
+  <body>
+    <div class="container">
+    
+    <!-- Nav Bar -->
+    <div class="navbar">
+      <a href="#" onclick="toggleNavbar()"><img src="{% static 'images/menu.png' %}" class="icon" alt="메뉴버튼"></a>
+      <a href=""><img src="{% static 'images/logo.png' %}" class="logo" alt="로고"></a>
+      <a href=""><img src="{% static 'images/login.png' %}" class="로그인" alt="로그인/마이페이지"></a>
+    </div>
+
+    <!-- Big box -->
+    {% if earliest_date %}
+      <div class="fcst_box">
+        <div class="duksung_location">덕성여자대학교</div>
+
+        <div class="fcst_main_icon" id="main_icon">
+          {% for category in earliest_date.categories %}
+            {% if category.category == 'SKY' %}
+              {% if category.fcstValue == '1' %}
+              {% generate_lottie_animation 'sunny' 'sunny-animation' %}
+              {% elif category.fcstValue == '3' %}
+              {% generate_lottie_animation 'little-cloudy' 'little-cloudy-animation' %}
+              {% elif category.fcstValue == '4' %}
+              {% generate_lottie_animation 'cloudy' 'cloudy-animation' %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div> 
+
+        {% for category in earliest_date.categories %}
+          {% if category.category == 'T1H' %}
+            <div class="frst_tmp">{{ category.fcstValue }} °C</div>
+          {% endif %}
+        {% endfor %}
+        {% for category in earliest_date.categories %}
+          {% if category.category == 'SKY' %}
+            <div class="sky">
+              {% if category.fcstValue == '1' %}
+                맑음
+              {% elif category.fcstValue == '3' %}
+                약간 흐림
+              {% else %}
+                흐림
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- mini boxes -->
+    <div class="fcst_box_mini_container">
+      {% for datetime, categories in organized_items.items|slice:':6' %}
+        
+        <div class="fcst_box_mini">
+          <div class="fcst_time">{{ datetime|slice:"-4:-2" }}시</div>  
+          
+            {% for category in categories %}
+              {% if category.category == 'SKY' %}
+
+                {% if category.fcstValue == '1' %}
+                  <div id="mini_sunny">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="50" height="50" preserveAspectRatio="xMidYMid meet">
+                      <defs>
+                          <clipPath id="__lottie_element_2">
+                              <rect width="256" height="256" x="0" y="0"></rect>
+                          </clipPath>
+                      </defs>
+                      <g clip-path="url(#__lottie_element_2)">
+                          <g transform="matrix(1,0,0,1,128,128)" opacity="1" style="display: block;">
+                              <g opacity="1" transform="matrix(1,0,0,1,0,0)"></g>
+                          </g>
+                          <g transform="matrix(1.0107111930847168,0,0,1.0107111930847168,128,128)" opacity="1" style="display: block;">
+                              <g opacity="1" transform="matrix(1,0,0,1,0,0)">
+                                  <path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(255,245,218)" stroke-opacity="1" stroke-width="4.571" d=" M0,-102.4000015258789 C56.51456069946289,-102.4000015258789 102.4000015258789,-56.51456069946289 102.4000015258789,0 C102.4000015258789,56.51456069946289 56.51456069946289,102.4000015258789 0,102.4000015258789 C-56.51456069946289,102.4000015258789 -102.4000015258789,56.51456069946289 -102.4000015258789,0 C-102.4000015258789,-56.51456069946289 -56.51456069946289,-102.4000015258789 0,-102.4000015258789z"></path>
+                              </g>
+                          </g>
+                          <g transform="matrix(0.9966981410980225,0,0,0.9966981410980225,127.43499755859375,127.43499755859375)" opacity="1" style="display: block;">
+                              <g opacity="1" transform="matrix(1,0,0,1,0,0)">
+                                  <path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(255,219,118)" stroke-opacity="1" stroke-width="8.533" d=" M0,-90.45500183105469 C49.922115325927734,-90.45500183105469 90.45500183105469,-49.922115325927734 90.45500183105469,0 C90.45500183105469,49.922115325927734 49.922115325927734,90.45500183105469 0,90.45500183105469 C-49.922115325927734,90.45500183105469 -90.45500183105469,49.922115325927734 -90.45500183105469,0 C-90.45500183105469,-49.922115325927734 -49.922115325927734,-90.45500183105469 0,-90.45500183105469z"></path>
+                              </g>
+                          </g>
+                          <g transform="matrix(1.0158956050872803,0,0,1.0158956050872803,127.43000030517578,127.43000030517578)" opacity="1" style="display: block;">
+                              <g opacity="1" transform="matrix(1,0,0,1,0,0)">
+                                  <path fill="rgb(255,200,47)" fill-opacity="1" d=" M0,-76.80000305175781 C42.385921478271484,-76.80000305175781 76.80000305175781,-42.385921478271484 76.80000305175781,0 C76.80000305175781,42.385921478271484 42.385921478271484,76.80000305175781 0,76.80000305175781 C-42.385921478271484,76.80000305175781 -76.80000305175781,42.385921478271484 -76.80000305175781,0 C-76.80000305175781,-42.385921478271484 -42.385921478271484,-76.80000305175781 0,-76.80000305175781z"></path>
+                              </g>
+                          </g>
+                      </g>
+                  </svg>
+                  
+                  </div>
+
+                {% elif category.fcstValue == '3' %}
+                  <div id="mini_little_cloudy">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="50" height="50" preserveAspectRatio="xMidYMid meet" style="width: 50px;height: 100%;transform: translate3d(0px, 0px, 0px);">
+                      <defs>
+                          <clipPath id="__lottie_element_2">
+                              <rect width="256" height="256" x="0" y="0"></rect>
+                          </clipPath>
+                      </defs>
+                      <g clip-path="url(#__lottie_element_2)">
+                          <g transform="matrix(1,0,0,1,127,128)" opacity="1" style="display: block;">
+                              <g opacity="1" transform="matrix(1,0,0,1,0,0)"></g>
+                          </g>
+                          <g transform="matrix(1,0,0,1,129.27499389648438,127.375)" opacity="1" style="display: block;">
+                              <g opacity="1" transform="matrix(1,0,0,1,0,0)">
+                                  <path fill="rgb(255,200,47)" fill-opacity="1" d=" M0,-84.92500305175781 C47.074310302734375,-84.92500305175781 85.29499816894531,-46.87010955810547 85.29499816894531,0 C85.29499816894531,46.87010955810547 47.074310302734375,84.92500305175781 0,84.92500305175781 C-47.074310302734375,84.92500305175781 -85.29499816894531,46.87010955810547 -85.29499816894531,0 C-85.29499816894531,-46.87010955810547 -47.074310302734375,-84.92500305175781 0,-84.92500305175781z"></path>
+                              </g>
+                          </g>
+                          <g transform="matrix(1,0,0,1,125.94209289550781,80.37000274658203)" opacity="1" style="display: block;">
+                              <g opacity="1" transform="matrix(1,0,0,1,0,0)">
+                                  <path fill="rgb(232,232,232)" fill-opacity="1" d=" M72.9000015258789,71.63999938964844 C72.9000015258789,71.63999938964844 26.100000381469727,71.63999938964844 26.100000381469727,71.63999938964844 C11.6899995803833,71.63999938964844 0,60.369998931884766 0,46.470001220703125 C0,32.56999969482422 11.6899995803833,21.299999237060547 26.100000381469727,21.299999237060547 C30.450000762939453,21.299999237060547 34.54999923706055,22.31999969482422 38.15999984741211,24.139999389648438 C43.18000030517578,10.09000015258789 57.0099983215332,0 73.29000091552734,0 C93.80000305175781,0 110.43000030517578,16.040000915527344 110.43000030517578,35.81999969482422 C110.43000030517578,36.220001220703125 110.41999816894531,36.630001068115234 110.41000366210938,37.029998779296875 C116.4000015258789,40.130001068115234 120.47000122070312,46.22999954223633 120.47000122070312,53.2400016784668 C120.47000122070312,63.400001525878906 111.93000030517578,71.63999938964844 101.4000015258789,71.63999938964844 C101.4000015258789,71.63999938964844 73.29000091552734,71.63999938964844 73.29000091552734,71.63999938964844 C73.2300033569336,71.63999938964844 72.9000015258789,71.63999938964844 72.9000015258789,71.63999938964844 C72.9000015258789,71.63999938964844 73.29000091552734,71.63999938964844 73.29000091552734,71.63999938964844 C73.29000091552734,71.63999938964844 72.9000015258789,71.63999938964844 72.9000015258789,71.63999938964844z"></path>
+                                  <path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(255,255,255)" stroke-opacity="1" stroke-width="7" d=" M72.9000015258789,71.63999938964844 C72.9000015258789,71.63999938964844 26.100000381469727,71.63999938964844 26.100000381469727,71.63999938964844 C11.6899995803833,71.63999938964844 0,60.369998931884766 0,46.470001220703125 C0,32.56999969482422 11.6899995803833,21.299999237060547 26.100000381469727,21.299999237"></path>
+                              </g>
+                            </g>
+                          </svg>
+                    </div>
+
+                {% elif category.fcstValue == '4' %}
+                <div id="mini_cloudy">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="50" height="50" preserveAspectRatio="xMidYMid meet" style="width: 50px; height: 100%; transform: translate3d(0px, 0px, 0px)">
+                    <defs>
+                      <clipPath id="__lottie_element_2">
+                        <rect width="256" height="256" x="0" y="0"></rect>
+                      </clipPath>
+                    </defs>
+                    <g clip-path="url(#__lottie_element_2)">
+                      <g transform="matrix(1,0,0,1,128,128)" opacity="1" style="display: block;">
+                        <g opacity="1" transform="matrix(1,0,0,1,0,0)"></g>
+                      </g>
+                      <g transform="matrix(1,0,0,1,149.19961547851562,53)" opacity="0.5" style="display: block;">
+                        <g opacity="1" transform="matrix(1,0,0,1,0,0)">
+                          <path fill="rgb(123,120,120)" fill-opacity="1" d="M56.11000061035156,57 C56.11000061035156,57 20.09000015258789,57 20.09000015258789,57 C9,57 0,48.029998779296875 0,36.970001220703125 C0,25.90999984741211 9,16.950000762939453 20.09000015258789,16.950000762939453 C23.440000534057617,16.950000762939453 26.600000381469727,17.760000228881836 29.3799991607666,19.209999084472656 C33.2400016784668,8.029999732971191 43.88999938964844,0 56.40999984741211,0 C72.20999908447266,0 85.01000213623047,12.760000228881836 85.01000213623047,28.5 C85.01000213623047,28.81999969482422 85,29.139999389648438 84.98999786376953,29.459999084472656 C89.5999984741211,31.93000030517578 92.73999786376953,36.779998779296875 92.73999786376953,42.36000061035156 C92.73999786376953,50.45000076293945 86.16000366210938,57 78.05000305175781,57 C78.05000305175781,57 56.40999984741211,57 56.40999984741211,57 C56.369998931884766,57 56.11000061035156,57 56.11000061035156,57 C56.11000061035156,57 56.40999984741211,57 56.40999984741211,57 C56.40999984741211,57 56.11000061035156,57 56.11000061035156,57z"></path>
+                        </g>
+                      </g>
+                      <g transform="matrix(1,0,0,1,15.451995849609375,63)" opacity="1" style="display: block;">
+                        <g opacity="1" transform="matrix(1,0,0,1,0,0)">
+                          <path fill="rgb(172,172,172)" fill-opacity="1" d="M123.61000061035156,125.55999755859375 C123.61000061035156,125.55999755859375 44.2599983215332,125.55999755859375 44.2599983215332,125.55999755859375 C19.81999969482422,125.55999755859375 0,105.80999755859375 0,81.44000244140625 C0,57.08000183105469 19.81999969482422,37.33000183105469 44.2599983215332,37.33000183105469 C51.63999938964844,37.33000183105469 58.59000015258789,39.130001068115234 64.70999908447266,42.310001373291016 C73.22000122070312,17.690000534057617 96.66999816894531,0 124.2699966430664,0 C159.0500030517578,0 187.25,28.110000610351562 187.25,62.779998779296875 C187.25,63.4900016784668 187.24000549316406,64.19999694824219 187.2100067138672,64.9000015258789 C197.3699951171875,70.33999633789062 204.27000427246094,81.02999877929688 204.27000427246094,93.31999969482422 C204.27000427246094,111.12000274658203 189.7899932861328,125.55999755859375 171.92999267578125,125.55999755859375 C171.92999267578125,125.55999755859375 124.2699966430664,125.55999755859375 124.2699966430664,125.55999755859375 C124.16999816894531,125.55999755859375 123.61000061035156,125.55999755859375 123.61000061035156,125.55999755859375 C123.61000061035156,125.55999755859375 124.2699966430664,125.55999755859375 124.2699966430664,125.55999755859375 C124.2699966430664,125.55999755859375 123.61000061035156,125.55999755859375 123.61000061035156,125.55999755859375z"></path>
+                        </g>
+                      </g>
+                    </g>
+                  </svg>
+                </div>
+                  
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+
+          {% for category in categories %}
+            {% if category.category == 'T1H' %}
+              <div class="fcst_tmp">{{ category.fcstValue }} °C</div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer><p>© 인프 7조. All rights reserved.</p></footer>
+
+    <script>
+      function toggleNavbar() {
+        var x = document.querySelector('.navbar a:not(.icon)')
+        x.style.display = x.style.display === 'block' ? 'none' : 'block'
+      }
+      
+    </script>
+  </body>
+</html>

@@ -34,8 +34,6 @@ def fetch_and_save_weather(request):
             base_time = str(now.hour) + "30"
         base_date = today
 
-    # print(base_time) # 성공
-
     # nx, ny는 덕성여대로 위치 고정
     # numOfRows=40와 pageNo=1로 해야 한 페이지에 전체 데이터가 나온다
     params = {
@@ -50,8 +48,6 @@ def fetch_and_save_weather(request):
 
     # services.py의 get_seather_data()를 가져와 딕셔너리 형태로 받기
     response = get_weather_data(api_url, api_key, params)
-
-    # print(response) # 성공
 
     if response and 'response' in response and 'body' in response['response']:
         # 데이터에 접근하려면 ['response']['body']['items']['item']안쪽으로 접근해야 한다
@@ -74,7 +70,6 @@ def fetch_and_save_weather(request):
             # T1H(기온), SKY(하늘상태), PTY(강수형태)의 데이터를 필터링한다
             desired_categories = {'T1H', 'SKY', 'PTY'}
             filtered_items = [item for item in items if item.get('category') in desired_categories]
-            # print(filtered_items) # 성공
 
             # 날짜와 시간을 기준으로 T1H, SKY, PTY를 묶기
             organized_items = {}
@@ -85,11 +80,26 @@ def fetch_and_save_weather(request):
                 if key not in organized_items:
                     organized_items[key] = []
                 organized_items[key].append({'category': item['category'], 'fcstValue': item['fcstValue']})
-            # print(organized_items) # 성공
+            
 
+            # Get the earliest date for landing2.html
+            earliest_date_key = min(organized_items.keys())
+            earliest_date_group = organized_items[earliest_date_key]
 
-        return render(request, 'success.html', 
-                      {'message': 'Data fetched and saved successfully!', 'organized_items': organized_items}
-                      )
+            # Extract all categories from the earliest date
+            earliest_date_categories = [{'category': item['category'], 'fcstValue': item['fcstValue']} for item in earliest_date_group]
+
+            earliest_date = {
+                'date_time': earliest_date_key,
+                'categories': earliest_date_categories,
+            }
+            
+
+        # Render landing2.html with the necessary data
+        return render(request, 'forecast/landing.html', {
+            'message': 'Data fetched and saved successfully!',
+            'organized_items': organized_items,
+            'earliest_date': earliest_date
+        })
     
-    return render(request, 'error.html', {'message': 'Failed to fetch data from the API.'})
+    return render(request, 'forecast/error.html', {'message': 'Failed to fetch data from the API.'})

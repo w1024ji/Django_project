@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/post/post_list.css' %}">
+    <title>날씨일기-post</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Nav Bar -->
+        <div class="navbar">
+            <a href="#" onclick="toggleNavbar()"><img src="{% static 'images/menu.png' %}" class="icon" alt="메뉴버튼"></a>
+            <a href=""><img src="{% static 'images/logo.png' %}" class="logo" alt="로고"></a>
+            <a href=""><img src="{% static 'images/login.png' %}" class="로그인" alt="로그인/마이페이지"></a>
+        </div>
+
+        <div class="post-title">
+            <div>날씨 일기</div>
+        </div>
+        <div class="post-list">
+            {% for p in post_list %}
+            <a href="{{p.pk}}/">
+                <div class="post-card">
+                    <div class="card-icon">{{ p.weather }}</div>
+                    <div class="card-right">
+                        <div class="card-title">{{ p.title }} ></div>
+                        <div class="card-text">{{ p.content | truncatewords:3 }}</div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+        </div>
+
+        <!-- Footer -->
+        <footer><p>© 인프 7조. All rights reserved.</p></footer>
+
+        <script>
+        function toggleNavbar() {
+            var x = document.querySelector('.navbar a:not(.icon)')
+            x.style.display = x.style.display === 'block' ? 'none' : 'block'
+        }
+        
+        </script>
+    </div>
+</body>
+</html>
