@@ -19,7 +19,7 @@ class Post(models.Model):
     weather = models.ForeignKey(Weather, null=True, blank=True, on_delete=models.SET_NULL)
     content = models.TextField(validators=[MinLengthValidator(1)])
     
-    head_image = models.ImageField(upload_to='blog/images/%Y/%m/%d/', blank=True)
+    head_image = models.ImageField(upload_to='post/images/%Y/%m/%d/', blank=True)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
