@@ -31,3 +31,6 @@ class Post(models.Model):
     
     def get_absolute_url(self):
         return f'/post/{self.pk}/'
+
+class MyModel(models.Model):
+    image = models.ImageField(upload_to='images/')
