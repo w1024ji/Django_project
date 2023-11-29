@@ -143,3 +143,6 @@ def vote(request):
     
     
     return JsonResponse({'error': 'Invalid request method. request.method != POST'})
+
+def tab(request):
+    return render(request, 'forecast/tab.html')
