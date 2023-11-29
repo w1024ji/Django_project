@@ -1,0 +1,96 @@
+@font-face {
+  font-family: "YOONCHILDFUNDKOREADAEHAN";
+  src: url("../../fonts/YOONCHILDFUNDKOREADAEHAN.TTF") format("woff2");
+}
+@font-face {
+  font-family: "YOONCHILDFUNDKOREAMANSEH";
+  src: url("../../fonts/YOONCHILDFUNDKOREAMANSEH.TTF") format("woff2");
+}
+
+body {
+  width: 392px;
+  height: 100vh;
+  margin: 0 auto;
+  font-family: YOONCHILDFUNDKOREAMANSEH;
+  background-image: url("../../images/background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.navbar {
+  width: 392px;
+  height: 53px;
+  margin-top: 10px;
+  background-color: none;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar a {
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Styling for the big box */
+.fcst_box {
+  text-align: center;
+  margin-top: 0;
+  padding: 10px;
+}
+
+.frst_tmp {
+  font-size: 24px;
+}
+
+.sky {
+  font-size: 20px;
+}
+
+.fcst_box_mini_container {
+  width: 392px;
+  height: 95px;
+  display: flex;
+  height: auto;
+  overflow: scroll;
+  overflow: hidden;
+}
+
+.fcst_box_mini {
+  width: 66px;
+  height: 95px;
+  text-align: center;
+  padding: 7px;
+  margin: 7px;
+}
+
+footer {
+  margin: 25px 0;
+  background-color: none;
+}
+
+footer p {
+  margin: 0;
+  font-size: 10px;
+  text-align: center;
+}
+
+#sunny-animation {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+#little-cloudy-animation {
+  width: 200px;
+  height: 200px; 
+  margin: 0 auto; 
+}
+#cloudy-animation {
+  width: 200px;
+  height: 200px; 
+  margin: 0 auto; 
+}

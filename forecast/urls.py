@@ -1,8 +1,9 @@
 # forecast/urls.py
-
 from django.urls import path
-from .views import fetch_and_save_weather
+from . import views
 
-urlpatterns = [ # namespace 추가함
-    path('fetch-weather/', fetch_and_save_weather, name='fetch_weather'),
+urlpatterns = [
+    path('', views.fetch_and_save_weather, name='fetch_and_save_weather'),
+    path('vote/', views.vote, name='vote'), # 삭제 예정??
 ]
+

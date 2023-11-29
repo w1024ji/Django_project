@@ -1,0 +1,28 @@
+<form method="POST" action="{% url 'signup' %}">
+    {% csrf_token %}
+    <p>닉네임</p>
+    <input type="text" placeholder="닉네임을 입력해주세요" name="nickname">
+    <br>
+    <p>아이디</p>
+    <input type="text" placeholder="아이디를 입력해주세요" name="username">
+    <br>
+    <p>비밀번호</p>
+    <input type="text" name="password">
+    <br>
+    <p>비밀번호 확인</p>
+    <input type="text" name="confirm">
+    <br>
+    <input type="submit" value="회원가입 하기">
+</form>
+
+<script>
+    // JavaScript를 사용하여 경고창을 표시
+    {% if error %}
+        alert("{{ error }}");
+
+        // 에러가 발생하면 1초 후에 회원가입 페이지로 리디렉션
+        setTimeout(function() {
+            window.location.href = "{% url 'signup' %}";
+        }, 1000);
+    {% endif %}
+</script>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>post_detail</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>My Text</th>
+        </tr>
+        <tr>
+            <td>
+                {% for char in my_text %}
+                    <div style="display: inline-block; border: 1px solid #ccc; width: 20px; height: 20px; text-align: center;">{{ char }}</div>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
