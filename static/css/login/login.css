@@ -1,0 +1,43 @@
+body {
+    text-align: center;
+}
+
+form {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+    border: none; /* 테두리 제거 */
+}
+
+input[type="submit"] {
+    width: 70%;
+    padding: 10px;
+    border-radius: 40px;
+    border: 1px solid #1e73be;
+    background-color: #1e73be;
+    color: white;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+a.button {
+    width: 40%;
+    display: inline-block;
+    padding: 10px;
+    background-color: #0c31a1;
+    color: white;
+    text-decoration: none;
+    border-radius: 40px;
+    margin-top: 50px;
+    margin-left: 25px; /* a 태그의 왼쪽 간격을 조절할 값 */
+}

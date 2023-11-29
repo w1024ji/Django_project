@@ -1,15 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login/login.css' %}">
+
+</head>
+<body>
 <form method="POST" action="{% url 'login' %}">
     {% csrf_token %}
-    <p>아이디</p>
+    <!--아이디-->
     <input type="text" placeholder="아이디를 입력해주세요" name="username">
     <br>
-    <p>비밀번호</p>
+    <!--비밀번호-->
     <input type="text" placeholder="비밀번호를 입력해주세요" name="password">
     <br>
     <input type="submit" value="로그인">
 </form>
 
-<p>아직 회원이 아니신가요? <a href="{% url 'signup' %}">회원가입</a></p>
+<p>아직 회원이 아니신가요? <a href="{% url 'signup' %}" class="button">회원가입</a></p>
 
 {% if error %}
     <script>
@@ -25,3 +33,5 @@
         }, 1000);
     </script>
 {% endif %}
+</body>
+</html>
