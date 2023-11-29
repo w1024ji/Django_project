@@ -24,7 +24,7 @@ class PostCreate(LoginRequiredMixin, CreateView):
         current_user = self.request.user
         if current_user.is_authenticated:
             form.instance.author = current_user
-            form.fields['weather'].queryset = Weather.objects.all()  # 여기서 queryset 설정
+            form.fields['weather'].queryset = Weather.objects.all()
             return super(PostCreate, self).form_valid(form)
         else:
             return redirect('/post')
@@ -46,7 +46,7 @@ class PostDelete(LoginRequiredMixin, DeleteView):
     
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
-            return super(PostUpdate, self).dispatch(request, *args, **kwargs)
+            return super(PostDelete, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
         
