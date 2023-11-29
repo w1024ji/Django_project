@@ -6,17 +6,17 @@
     <title>post_detail</title>
 </head>
 <body>
-    <table>
-        <tr>
-            <th>My Text</th>
-        </tr>
-        <tr>
-            <td>
-                {% for char in my_text %}
-                    <div style="display: inline-block; border: 1px solid #ccc; width: 20px; height: 20px; text-align: center;">{{ char }}</div>
-                {% endfor %}
-            </td>
-        </tr>
-    </table>
+    <div>
+        <h1>{{post.title}}</h1>
+        <!-- Preview image figure-->
+        {% if post.head_image %}
+        <img class="img-fluid rounded" src="{{post.head_image.url}}" alt="..." />
+            {% else %}
+        {% endif %}
+        <!-- Post content-->
+        <section class="mb-5">
+            <p>{{post.content}}</p>
+        </section>
+    </div>
 </body>
 </html>
