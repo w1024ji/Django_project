@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('forecast.urls')),
     path('user/', include('user.urls')),
     path('post/', include('post.urls')),
+    path('chat/', include('chat.urls')),
 ]
 
 if settings.DEBUG:

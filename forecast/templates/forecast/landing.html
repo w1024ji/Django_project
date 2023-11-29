@@ -25,20 +25,12 @@
     <div class="navbar">
       <a href="#" onclick="toggleNavbar()"><img src="{% static 'images/menu.png' %}" class="icon" alt="메뉴버튼"></a>
       <a href=""><img src="{% static 'images/logo.png' %}" class="logo" alt="로고"></a>
-      <a href=""><img src="{% static 'images/login.png' %}" class="로그인" alt="로그인/마이페이지"></a>
+      {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}"><img src="{% static 'images/profile.png' %}" class="로그인" alt="로그인/마이페이지"></a>
+      {% else %}
+        <a href="{% url 'login' %}"><img src="{% static 'images/login.png' %}" class="로그인" alt="로그인/마이페이지"></a>
+      {% endif %}
     </div>
-
-
-
-    <p>hello my name is </p>
-    {% if user.is_authenticated %}
-        <p>Welcome, {{ user.username }}!</p>
-        <p><a href="{% url 'logout' %}">Logout</a></p>
-    {% else %}
-        <p>Welcome to the landing page! Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up</a>.</p>
-    {% endif %}
-
-
 
     <!-- Big box -->
     {% if earliest_date %}

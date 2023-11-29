@@ -1,0 +1,47 @@
+
+
+
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Room</title>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+         <link rel="stylesheet" href="{% static 'chat/bootstrap/bootstrap.min.css' %}" media="screen">
+
+     <link rel="stylesheet" href="{% static 'chat/styles.css' %}">
+
+</head>
+<body>
+<div id="roomBody" style="background-color: #badce3">
+
+<div id="chatroom_box">
+
+    <div id="chat-container">
+        <div id="chat-log" class="chat-log-container"></div>
+        <br>
+       {% comment %} <input id="chat-message-input" type="text" size="20">
+        <input id="chat-message-submit"  type="button" class="btn btn-outline-secondary" value="Send">
+    {% endcomment %}
+
+{#       class="form-control"  #}
+        <div class="input-group mb-3">
+          <input id="chat-message-input" type="text" class="form-control" placeholder="메시지를 입력하세요" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button id="chat-message-submit" class="btn btn-secondary" type="button">send</button>
+          </div>
+        </div>
+
+    </div>
+</div>
+</div>
+{{ room_name|json_script:"room-name" }}
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+      <script src="{% static 'chat/chatting.js' %}"></script>
+<script src="{% static 'chat/scroll_to_bottom.js' %}"></script>
+</body>
+</html>
