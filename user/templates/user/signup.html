@@ -1,3 +1,11 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/signup/signup.css' %}">
+
+</head>
+<body>
 <form method="POST" action="{% url 'signup' %}">
     {% csrf_token %}
     <p>닉네임</p>
@@ -7,7 +15,7 @@
     <input type="text" placeholder="아이디를 입력해주세요" name="username">
     <br>
     <p>비밀번호</p>
-    <input type="text" name="password">
+    <input type="text" placeholder="영문, 숫자 조합 최소 8자를 입력해주세요" name="password">
     <br>
     <p>비밀번호 확인</p>
     <input type="text" name="confirm">
@@ -26,3 +34,5 @@
         }, 1000);
     {% endif %}
 </script>
+</body>
+</html>
