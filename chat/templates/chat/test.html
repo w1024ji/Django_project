@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+
+
+<!-- chat/templates/chat/room.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Room</title>
+</head>
+<body>
+    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+    <input id="chat-message-input" type="text" size="100"><br>
+    <input id="chat-message-submit" type="button" value="Send">
+    {{ room_name|json_script:"room-name" }}
+    <script>
+        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/'
+        );
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            document.querySelector('#chat-log').value += (data.message + '\n');
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#chat-message-input').focus();
+        document.querySelector('#chat-message-input').onkeyup = function(e) {
+            if (e.key === 'Enter') {  // enter, return
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'message': message
+            }));
+            messageInputDom.value = '';
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+{#js code#}
+
+
+        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+        const chatLog = document.querySelector('#chat-log');
+
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/'
+        );
+
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            const message = data.message;
+
+            const timestampStr = data.timestamp;
+            const formattedTimestamp = new Date(timestampStr).toLocaleString();
+
+            // 받은 메시지를 chat-log에 추가 (스타일 정보를 적용)
+       //     chatLog.innerHTML += `<div class="chat-message">${message}</div>`;
+            chatLog.innerHTML += `<div class="chat-message"><span class="messageString">${message}</span> <span class="message_time">${formattedTimestamp}</span></div>`;
+            //message 구조
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#chat-message-input').focus();
+        document.querySelector('#chat-message-input').onkeyup = function(e) {
+            if (e.key === 'Enter') {  // enter, return
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'message': message
+            }));
+            messageInputDom.value = '';
+        };
+
+
+
+{#style _ send message #}
+
+input[type=text] {
+  width: 70%;
+  /*height: 100%;*/
+  font-size: 1em;
+  border: 0;
+  /*border-radius: 5px;*/
+  outline: none;
+  padding-left: 10px;
+  background-color: rgb(233, 233, 233);
+  display:inline;
+  box-sizing: border-box;
+}
+
+button {
+    border: 3px;
+    margin-left: -5px;
+    background-color: white;
+}
+
+input[type=button] {
+    width: 70px;
+    height: 100%;
+    /*background-color: lightgray;*/
+    /*border:none;*/
+    background-color: white;
+    font-size: 1em;
+    color: #042Aac;
+    outline:none;
+    display: inline;
+    margin-left: -10px;
+    box-sizing: border-box;
+}
+
+input[type=button]:hover {
+    background-color: dimgray;
+}
+
+.form-control:focus {
+    box-shadow: black;
+}
