@@ -12,8 +12,9 @@ import os
 
 def fetch_and_save_weather(request):
     api_url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst'
-    api_key = os.getenv('API_KEY', '')
-
+    # api_key = os.getenv('API_KEY', '')
+    api_key = '8XsGVAkQfYwV7wuunoB7fhtSlq14q2Zjy9%2B7wuNOK89suC8yKVTQlsGC5JzkOGrPw1kMmIxLHSNIthTBYakRPA%3D%3D'
+    
     now = datetime.now()
     today = datetime.today().strftime("%Y%m%d")
     y = date.today() - timedelta(days=1)
