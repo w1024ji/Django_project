@@ -1,0 +1,73 @@
+/* forecast/static/forecast/css/pollCSS.css */
+
+.poll_container{
+  width: 347px;
+  border-radius: 13px;
+  border: 1px solid var(--color3, #314290);
+  margin: 0 auto;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vote-container-title {
+  color: #314290;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21.154px;
+  letter-spacing: -0.392px;
+  margin-left: 23px;
+  margin-top: 16px;
+}
+
+.poll-question {
+  font-size: 16px;
+  text-align: center; /* Optional: Center the question */
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.choice {
+  width: 300px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  max-width: 300px; /* Set your preferred max-width */
+  box-sizing: border-box;
+  width: 100%; /* Make the choices take the full width */
+}
+
+.choice span {
+  font-size: 14px;
+}
+
+.vote-count{
+  height: 10px;
+}
+
+.chart {
+  height: 20px;
+  background-color: #707887a7; /* Color A - Default color */
+  transition: width 0.5s, background-color 0.5s; /* Add transition for a smoother effect */
+  border-radius: 8px;
+}
+  
+.choice.selected .chart {
+  background-color: #f0d32dcd; /* Color B - Color after selected */
+}
+  
+.percentage-count {
+  margin-right: 13px;
+  float: right;
+}
+
+#percentage.percentage-count{
+  margin-left: 10px;
+  float: right;
+}
+  
+  
+/* .vote-count {
+  visibility: hidden;
+} */

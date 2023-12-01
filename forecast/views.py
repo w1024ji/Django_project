@@ -8,7 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from .services import get_weather_data
 import os
-
+from post.models import Post
+from chat.models import ChatMessage
 
 def fetch_and_save_weather(request):
     api_url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst'
@@ -51,12 +52,8 @@ def fetch_and_save_weather(request):
     }
     
     import time
-    start_time = time.time()  # Record the start time
     # services.py의 get_seather_data()를 가져와 딕셔너리 형태로 받기
     response = get_weather_data(api_url, api_key, params)
-    end_time = time.time()  # Record the end time
-    elapsed_time = end_time - start_time
-    print(f"views.py에 가져오기까지 걸린 시간: {elapsed_time} seconds")
 
     if response and 'response' in response and 'body' in response['response']:
         # 데이터에 접근하려면 ['response']['body']['items']['item']안쪽으로 접근해야 한다
@@ -106,16 +103,21 @@ def fetch_and_save_weather(request):
 
         # Poll 모델에서 가져오기
         poll = Poll.objects.first()  # 원한다면 수정 가능
-
+        post = Post.objects.all()
+        chat = ChatMessage.objects.all()
+        
         print('organized_items 값: ', organized_items)
         print('earliest_date 값: ', earliest_date)
+        
         
         # user 넘기는 거 고민하셈(구현 필요)
         return render(request, 'forecast/landing.html', {
             'message': 'Data fetched and saved successfully!',
             'organized_items': organized_items,
             'earliest_date': earliest_date,
-            'poll': poll,  
+            'poll': poll,
+            'post': post,
+            'chat': chat,
         }) 
     
     return render(request, 'error.html', {'message': 'Failed to fetch data from the API.'})

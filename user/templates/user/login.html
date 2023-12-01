@@ -2,22 +2,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/login/login.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/user/login.css' %}">
 
 </head>
 <body>
-<form method="POST" action="{% url 'login' %}">
-    {% csrf_token %}
-    <!--아이디-->
-    <input type="text" placeholder="아이디를 입력해주세요" name="username">
-    <br>
-    <!--비밀번호-->
-    <input type="text" placeholder="비밀번호를 입력해주세요" name="password">
-    <br>
-    <input type="submit" value="로그인">
-</form>
+    <!-- Nav Bar -->
+    <div class="navbar">
+        <a href="{% url 'tab' %}" onclick="toggleNavbar()"><img src="{% static 'images/menu.png' %}" class="icon" alt="메뉴버튼"></a>
+    </div>
 
-<p>아직 회원이 아니신가요? <a href="{% url 'signup' %}" class="button">회원가입</a></p>
+    <div class="logo"><img src="{% static 'images/logo.png' %}" alt="로고"></div>
+    
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        <!--아이디-->
+        <input type="text" placeholder="아이디를 입력해주세요" name="username">
+        <br>
+        <!--비밀번호-->
+        <input type="password" placeholder="비밀번호를 입력해주세요" name="password">
+        <br>
+        <input type="submit" value="로그인">
+    </form>
+
+    <div class="signup-area">
+        <p>아직 회원이 아니신가요?</p>
+        <a href="{% url 'signup' %}" class="button">회원가입</a>
+    </div>
 
 {% if error %}
     <script>
