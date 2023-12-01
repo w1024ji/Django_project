@@ -11,9 +11,13 @@
     <div class="container">
         <!-- Nav Bar -->
         <div class="navbar">
-            <a href="#" onclick="toggleNavbar()"><img src="{% static 'images/menu.png' %}" class="icon" alt="메뉴버튼"></a>
-            <a href=""><img src="{% static 'images/logo.png' %}" class="logo" alt="로고"></a>
-            <a href=""><img src="{% static 'images/login.png' %}" class="로그인" alt="로그인/마이페이지"></a>
+            <a href="{% url 'tab' %}" onclick="toggleNavbar()"><img src="{% static 'images/menu.png' %}" class="icon" alt="메뉴버튼"></a>
+            <a href="{% url 'fetch_and_save_weather' %}"><img src="{% static 'images/logo.png' %}" class="logo" alt="로고"></a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'tab' %}"><img src="{% static 'images/profile.png' %}" class="icon2" alt="마이페이지"></a>
+            {% else %}
+            <a href="{% url 'login' %}"><img src="{% static 'images/login.png' %}" class="icon2" alt="로그인"></a>
+            {% endif %}
         </div>
 
         <div class="post-title">
