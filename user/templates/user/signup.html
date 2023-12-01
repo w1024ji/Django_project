@@ -1,19 +1,33 @@
-<form method="POST" action="{% url 'signup' %}">
-    {% csrf_token %}
-    <p>닉네임</p>
-    <input type="text" placeholder="닉네임을 입력해주세요" name="nickname">
-    <br>
-    <p>아이디</p>
-    <input type="text" placeholder="아이디를 입력해주세요" name="username">
-    <br>
-    <p>비밀번호</p>
-    <input type="text" name="password">
-    <br>
-    <p>비밀번호 확인</p>
-    <input type="text" name="confirm">
-    <br>
-    <input type="submit" value="회원가입 하기">
-</form>
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/user/signup.css' %}">
+
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'tab' %}" onclick="toggleNavbar()"><img src="{% static 'images/menu.png' %}" class="icon" alt="메뉴버튼"></a>
+        <a href=""><img src="{% static 'images/logo.png' %}" class="logo" alt="로고"></a>
+        <a><div class="blank"></div></a>
+    </div>
+
+    <form method="POST" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <p>닉네임 <span>*</span></p>
+        <input type="text" placeholder="닉네임을 입력해주세요" name="nickname">
+        <br>
+        <p>아이디 <span>*</span></p>
+        <input type="text" placeholder="아이디를 입력해주세요" name="username">
+        <br>
+        <p>비밀번호 <span>*</span></p>
+        <input type="password" placeholder="영문, 숫자 조합 최소 8자를 입력해주세요" name="password">
+        <br>
+        <p>비밀번호 확인 <span>*</span></p>
+        <input type="password" placeholder="다시 입력해주세요" name="confirm">
+        <br>
+        <input type="submit" value="회원가입 하기">
+    </form>
 
 <script>
     // JavaScript를 사용하여 경고창을 표시
@@ -26,3 +40,5 @@
         }, 1000);
     {% endif %}
 </script>
+</body>
+</html>

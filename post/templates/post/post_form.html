@@ -8,16 +8,7 @@
 <body>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <table>
-                <tr>
-                    <td>{{ form.as_p }}</td>
-                    <td>
-                        {% for char in field.value %}
-                            <input type="text" name="{{ field.name }}[]" value="{{ char }}" maxlength="1" style="width: 20px; text-align: center;">
-                        {% endfor %}
-                    </td>
-                </tr>
-        </table>
+        {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
 </body>

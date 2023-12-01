@@ -1,9 +1,9 @@
 # forecast/services.py
 
 import requests
+import time
 
 def get_weather_data(api_url, api_key, params):
-
     url = f"{api_url}?serviceKey={api_key}"
 
     # 요청에 헤더도 넣음

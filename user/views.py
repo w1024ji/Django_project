@@ -37,13 +37,13 @@ def signup(request):
 
         # 아이디가 최소 4글자 이상인지 확인
         if len(request.POST['username']) < 4:
-            error_message = "아이디는 최소 4글자 이상이어야 합니다."
+            error_message = "아이디는 최소 4자 이상이어야 합니다."
             return render(request, 'user/signup.html', {'error': error_message})
 
         # 비밀번호가 조건을 충족하는지 확인
         password = request.POST['password']
         if len(password) < 8 or not any(char.isdigit() for char in password) or not any(char.isalpha() for char in password):
-            error_message = "비밀번호는 영문과 숫자를 포함하여 8글자 이상이어야 합니다."
+            error_message = "비밀번호는 영문과 숫자를 포함하여 8자 이상이어야 합니다."
             return render(request, 'user/signup.html', {'error': error_message})
 
         # 비밀번호가 조건을 충족하고, 아이디가 최소 4글자 이상이며 이미 가입되지 않은 경우에 새로운 유저를 만들고 로그인

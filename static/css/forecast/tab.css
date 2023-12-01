@@ -1,0 +1,61 @@
+@font-face {
+    font-family: "YOONCHILDFUNDKOREADAEHAN";
+    src: url("../../fonts/YOONCHILDFUNDKOREADAEHAN.TTF") format("woff2");
+}
+@font-face {
+    font-family: "YOONCHILDFUNDKOREAMANSEH";
+    src: url("../../fonts/YOONCHILDFUNDKOREAMANSEH.TTF") format("woff2");
+}
+
+body {
+    width: 392px;
+    height: 100vh;
+    margin: 0 auto;
+    font-family: YOONCHILDFUNDKOREAMANSEH;
+    background-image: url("../../images/background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.tab-container{
+    margin-top: 20px;
+}
+
+.tab-container > div {
+    border-bottom: 0.2px solid #000;
+}
+
+.tab-fist-box ~ div {
+    width: 392px;
+    height: 39.845px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.tab-fist-box ~ div a {
+    padding-left: 21px;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.tab-fist-box {
+    width: 392px;
+    height: 53px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tab-title {
+    color: #314290;
+    font-size: 20px;
+    padding-left: 21px;
+}
+
+.tab-title ~ a {
+    padding-right: 21px;
+}
