@@ -68,4 +68,3 @@ def weather_page(request, slug):
             'weather' : weather,
         }
     )
-
