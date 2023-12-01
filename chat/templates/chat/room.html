@@ -14,13 +14,27 @@
 
 </head>
 <body>
-<div id="roomBody" style="background-color: #badce3">
+<div id="roomBody">
+
+<!-- Nav Bar -->
+<div class="navbar">
+  <a href="{% url 'tab' %}" onclick="toggleNavbar()"><img src="{% static 'images/menu.png' %}" class="icon" alt="메뉴버튼"></a>
+  <a href="{% url 'fetch_and_save_weather' %}"><img src="{% static 'images/logo.png' %}" class="logo" alt="로고"></a>
+  {% if user.is_authenticated %}
+    <a href="{% url 'tab' %}"><img src="{% static 'images/profile.png' %}" class="icon2" alt="마이페이지"></a>
+  {% else %}
+    <a href="{% url 'login' %}"><img src="{% static 'images/login.png' %}" class="icon2" alt="로그인"></a>
+  {% endif %}
+</div>
+
+<div class="chat-title">
+  <div>LIVE TALK</div>
+</div>
 
 <div id="chatroom_box">
 
     <div id="chat-container">
         <div id="chat-log" class="chat-log-container"></div>
-        <br>
        {% comment %} <input id="chat-message-input" type="text" size="20">
         <input id="chat-message-submit"  type="button" class="btn btn-outline-secondary" value="Send">
     {% endcomment %}

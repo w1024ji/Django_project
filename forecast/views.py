@@ -103,8 +103,8 @@ def fetch_and_save_weather(request):
 
         # Poll 모델에서 가져오기
         poll = Poll.objects.first()  # 원한다면 수정 가능
-        post = Post.objects.all()
-        chat = ChatMessage.objects.all()
+        post = Post.objects.all().order_by('-created_at')[:5]
+        chat = ChatMessage.objects.all().order_by('-timestamp')[:5]
         
         print('organized_items 값: ', organized_items)
         print('earliest_date 값: ', earliest_date)

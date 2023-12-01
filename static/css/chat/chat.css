@@ -1,21 +1,85 @@
-body {
-    background-color: #badce3;
+@font-face {
+    font-family: "YOONCHILDFUNDKOREADAEHAN";
+    src: url("../../fonts/YOONCHILDFUNDKOREADAEHAN.TTF") format("woff2");
+}
+@font-face {
+    font-family: "YOONCHILDFUNDKOREAMANSEH";
+    src: url("../../fonts/YOONCHILDFUNDKOREAMANSEH.TTF") format("woff2");
 }
 
+html {
+    min-height: 700px;
+}
+
+body {
+    width: 392px;
+    height: 700px;
+    margin: 0 auto;
+    font-family: YOONCHILDFUNDKOREAMANSEH;
+    background-image: url("../../images/background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.navbar {
+    width: 392px;
+    height: 53px;
+    margin-top: 10px;
+    background-color: none;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.icon {
+    width: 20px;
+    height: 15px;
+}
+
+.logo {
+    width: 66px;
+    height: 24px;
+}
+
+.icon2 {
+    width: 21.996px;
+    height: 21.996px;
+}
+
+.chat-title {
+    width: 393px;
+}
+
+.chat-title div {
+    margin-left: 16px;
+    margin-top: 17px;
+    margin-bottom: 16px;
+    color: #314290;
+    font-size: 20px;
+}
 
 #chatroom_box {
-/*    채팅칭 및 form을 감싸는 영역*/
-    margin: 10px;
-    padding: 10px;
+    width: 347px;
+    height: 485px;
+    margin: 0 auto;
 }
 
 
 .chat-log-container {
     /*메시지 오가는 영역. */
-    border: 3px solid black;
+    border: 1px solid #314290;;
+    border-radius: 13px;
     padding-top: 13px;
     min-height: 500px;
-    border-radius: 5px;
     /*height: 400px;*/
     /*overflow: auto;*/
     /*overflow-y: hidden;*/
@@ -27,12 +91,21 @@ body {
     display: none;
 }
 
+.input-group {
+    margin-top: 15px;
+}
 
 input[type=text] {
+    border-bottom-left-radius: 13px;
+    border-top-left-radius: 13px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 button[type=button] {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
     background-color: #ced4da;
     border-color: #ced4da;
     color: black;
