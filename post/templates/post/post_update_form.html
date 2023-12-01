@@ -6,21 +6,6 @@
     <title>post_update_form</title>
 </head>
 <body>
-
-{% block head_title %}
-Update Post-POST
-{% endblock %}
-
-{%block main-area %}
-<h1> Edit Post </h1>
-<hr>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table>
-        {{ form }}
-    </table>
-    <button type="submit"> Summit </button>
-</form>
-{% endblock %}
+    
 </body>
 </html>
