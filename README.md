@@ -69,7 +69,8 @@
 - **서비스 이미지**
   <hr>
   <img src="https://github.com/finalprj-7/Django_project/assets/126389940/32dc21b8-172b-496c-8079-a7468e1f07f3" width="200"/>
-  <img src="https://github.com/finalprj-7/Django_project/assets/126389940/4bad993a-0481-485d-901c-6c1c82c0d8aa" width="200"/> <br>
+  <img src="https://github.com/finalprj-7/Django_project/assets/126389940/4bad993a-0481-485d-901c-6c1c82c0d8aa" width="200"/>
+  <img src="https://github.com/finalprj-7/Django_project/assets/126389940/6d1275d7-764d-4922-a1b1-316b76e45630" width="200"/> <br>
 
   <img src="https://github.com/finalprj-7/Django_project/assets/126389940/a35e501f-c033-4691-aea9-3cd76893b748" width="200"/>
   <img src="https://github.com/finalprj-7/Django_project/assets/126389940/bf5f893f-55eb-4a8a-82a0-7fc2592e3113" width="200"/>
