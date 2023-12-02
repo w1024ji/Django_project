@@ -1,16 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/user/mypage.css' %}">
+    <title>myPage</title>
 </head>
 <body>
-
+    <!-- Nav Bar -->
+    <div class="navbar">
+        <a href="{% url 'tab' %}"><img src="{% static 'images/menu.png' %}" class="icon" alt="메뉴버튼"></a>
+        <a href="{% url 'fetch_and_save_weather' %}"><img src="{% static 'images/logo.png' %}" class="logo" alt="로고"></a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'mypage' %}"><img src="{% static 'images/profile.png' %}" class="icon2" alt="마이페이지"></a>
+        {% else %}
+            <a href="{% url 'login' %}"><img src="{% static 'images/login.png' %}" class="icon2" alt="로그인"></a>
+        {% endif %}
+    </div>
 <div id="myPage_container">
-    <h1>마이 페이지</h1>
-    <div id="enterMyPosts"><a href="/user/my_posts/">내가 작성한 게시글</a></div>
-    <div id="logout_Page"><a href="/user/logout/">로그 아웃</a></div>
+    <div class="mypage-title">
+        <div>마이페이지</div>
+    </div>
+    <div class="mypage-list">
+        <a href="/user/my_posts/"><div id="enterMyPosts">나의 날씨 일기 ></div></a>
+        <a href="/user/logout/"><div id="logout_Page">로그아웃</div></a>
+    </div>
 
+    <!-- Footer -->
+    <footer><p>© 인프 7조. All rights reserved.</p></footer>
 </div>
 
 

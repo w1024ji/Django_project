@@ -54,7 +54,7 @@
   border-radius: 8px;
 }
   
-.choice.selected .chart {
+#choice-selected {
   background-color: #f0d32dcd; /* Color B - Color after selected */
 }
   
