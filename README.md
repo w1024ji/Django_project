@@ -27,7 +27,7 @@
 이러쿵 저러쿵... 일기에 담기에는 사소하지만, 어딘가에는 털어놓고 싶은 말들을 남겨보세요. <br>
 독백 형식의 커뮤니티를 선호하는 젊은 사용자층의 특징을 고려하여 혼잣말처럼 할 수 있는 '실시간 채팅'을 도입하여 기존 커뮤니티의 특징에 차별점을 두었습니다. <br><br>
 
-단순하고 직관적인 날씨 정보 시각화 뿐 아니라, 날씨 관련 재미있는 밸런스 게임도 준비되어 있으니 '날씨 일기'에서 함께해요! <br>
+단순하고 직관적인 날씨 정보 시각화 뿐 아니라, 날씨 관련 재미있는 밸런스 게임도 준비되어 있으니 '날씨 일기'에서 함께해요! <br><br>
 
 
 - **기술 스택**
@@ -38,7 +38,7 @@
 
   <span>DB: </span><img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white"> <img src="https://img.shields.io/badge/redis-%23DD0031.svg?&style=for-the-badge&logo=redis&logoColor=white">
 
-  <span>디자인: </span> <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
+  <span>디자인: </span> <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"> <br><br>
 
 - **팀원 소개**
   <table border="" cellspacing="0" cellpadding="0" width="100%">
@@ -64,7 +64,7 @@
           <td  align="center"><p>PPT 제작</p><p>실시간 채팅</p><p>마이페이지</p></td>
           <td  align="center"><p>발표</p><p>로그인/회원가입</p><p> </p></td>
      </tr>
-  </table>
+  </table> <br><br>
 
 - **서비스 이미지**
   <hr>
