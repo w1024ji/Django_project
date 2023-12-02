@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Posts</title>
+</head>
+<body>
+
+<div>
+    <h1>{{ username }} 님이 작성한 날씨 일기 </h1>
+  <div>
+  {% if posts %}
+    <div class="my_post_section">
+      {% for post in posts %}
+          <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+<!--          <p>{{ post.content | truncatechars:20 }}</p>-->
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No posts found.</p>
+  {% endif %}
+</div>
+</div>
+
+</body>
+</html>
