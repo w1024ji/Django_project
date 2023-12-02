@@ -108,6 +108,11 @@ footer p {
   height: 200px; 
   margin: 0 auto; 
 }
+#rainy-animation {
+  width: 200px;
+  height: 200px; 
+  margin: 0 auto; 
+}
 
 .post-container-title {
   margin-left: 23px;

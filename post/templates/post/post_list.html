@@ -21,13 +21,14 @@
         </div>
 
         <div class="post-title">
-            <div>날씨 일기</div>
+            <div class="weather-diary">날씨 일기</div>
+            <a href="{% url 'create' %}"><div class="post-btn">작성하기</div></a>
         </div>
         <div class="post-list">
             {% for p in post_list %}
             <a href="{{p.pk}}/">
                 <div class="post-card">
-                    <div class="card-icon">{{ p.weather }}</div>
+                    <div class="card-icon"><img src="{{ p.weather.image.url }}" alt="날씨이미지"></div>
                     <div class="card-right">
                         <div class="card-title">{{ p.title }} ></div>
                         <div class="card-text">{{ p.content | truncatewords:3 }}</div>

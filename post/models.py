@@ -1,6 +1,7 @@
 from django.core.validators import MinLengthValidator
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 class Weather(models.Model):
@@ -17,12 +18,11 @@ class Weather(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=30, validators=[MinLengthValidator(1)])
     weather = models.ForeignKey(Weather, null=True, blank=True, on_delete=models.SET_NULL)
-    content = models.TextField(validators=[MinLengthValidator(1)])
+    content = models.TextField(max_length=60, validators=[MinLengthValidator(1)])
     
     head_image = models.ImageField(upload_to='post/images/%Y/%m/%d/', blank=True)
     
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateField(default=timezone.now)
     
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     

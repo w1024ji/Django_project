@@ -40,6 +40,7 @@
         <!--메인 애니메이션-->
         <div class="fcst_main_icon" id="main_icon">
           {% for category in earliest_date.categories %}
+          
           <!--강수량이 있다면 (비 or 눈)-->
             {% if category.category == 'PTY' %}
               {% if category.fcstValue == '1' or category.fcstValue == '2' or  category.fcstValue == '5' or category.fcstValue == '6' %}

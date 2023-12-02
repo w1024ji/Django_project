@@ -18,7 +18,18 @@ class PostDetail(DetailView):
 
 class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'head_image', 'weather']
+    fields = ['title', 'content', 'head_image', 'weather', 'created_at']
+    
+    def get_form_class(self):
+        class CustomPostForm(forms.ModelForm):
+            class Meta:
+                model = Post
+                fields = ['title', 'content', 'head_image', 'weather', 'created_at']
+                widgets = {
+                    'created_at': forms.SelectDateWidget(),
+                }
+
+        return CustomPostForm
 
     def form_valid(self, form):
         current_user = self.request.user
@@ -31,8 +42,19 @@ class PostCreate(LoginRequiredMixin, CreateView):
     
 class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
-    fields = ['title', 'content', 'head_image', 'weather']
+    fields = ['title', 'content', 'head_image', 'weather', 'created_at']
     template_name = 'post/post_update_form.html'
+    
+    def get_form_class(self):
+        class CustomPostForm(forms.ModelForm):
+            class Meta:
+                model = Post
+                fields = ['title', 'content', 'head_image', 'weather', 'created_at']
+                widgets = {
+                    'created_at': forms.SelectDateWidget(),
+                }
+
+        return CustomPostForm
     
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
@@ -49,6 +71,9 @@ class PostDelete(LoginRequiredMixin, DeleteView):
             return super(PostDelete, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
+    
+    def render_to_response(self, context, **response_kwargs):
+        return render(self.request, 'post/post_delete_confirm.html', context)
         
 def weather_page(request, slug):
     if slug == 'no_category' :
