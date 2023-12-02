@@ -47,27 +47,9 @@
   <td align="center">장현지</a></td>
   <td align="center">전효민</a></td>
   </tr>
-  <tr width="100%">
-  <td  align="center">
-    <img src="https://github.com/finalprj-7/Django_project/assets/126389940/66848a81-f2a6-4b52-b73b-906499f16140)/>
-  </td>
-  <td  align="center">
-    <img src="https://github.com/finalprj-7/Django_project/assets/126389940/87f5c279-24c4-4482-8b52-f50a2e758f19)/>
-  </td>
-  <td  align="center">
-    <img src="https://github.com/finalprj-7/Django_project/assets/126389940/08a49f9d-44da-4ccb-8b07-6616ccdfacf6)/>
-  </td>
-  <td  align="center">
-    <img src="https://github.com/finalprj-7/Django_project/assets/126389940/94043d29-8071-4678-9bf2-5871805021e5)/>
-  </td>
-  <td  align="center">
-    <img src="https://github.com/finalprj-7/Django_project/assets/126389940/f6fc189e-76fc-4623-b230-715d6143872d)/>
-  </td>
   
-  </tr>
   <tr width="100%">
   <td  align="center">팀장</td>
-  <td  align="center">팀원</td>
   <td  align="center">팀원</td>
   <td  align="center">팀원</td>
   <td  align="center">팀원</td>
