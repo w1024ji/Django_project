@@ -102,8 +102,11 @@ def fetch_and_save_weather(request):
         # Poll 모델에서 가져오기
         poll = Poll.objects.first()  # 원한다면 수정 가능
         post = Post.objects.all().order_by('-created_at')[:5]
-        chat = ChatMessage.objects.all().order_by('-timestamp')[:5]        
-        
+        chat = ChatMessage.objects.all().order_by('-timestamp')[:5] 
+    
+        flag = 'True'  # big icon의 break를 위해
+        flag2 = 'True' # small icon의 break를 위해
+
         return render(request, 'forecast/landing.html', {
             'message': 'Data fetched and saved successfully!',
             'organized_items': organized_items,
@@ -111,6 +114,8 @@ def fetch_and_save_weather(request):
             'poll': poll,
             'post': post,
             'chat': chat,
+            'flag': flag,
+            'flag2': flag2,
         }) 
     
     return render(request, 'error.html', {'message': 'Failed to fetch data from the API.'})
