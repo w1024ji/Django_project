@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from .services import get_weather_data
 import os
 from post.models import Post
-from chat.models import ChatMessage
+from chat.models import Chat
 
 def fetch_and_save_weather(request):
     api_url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst'
@@ -102,11 +102,12 @@ def fetch_and_save_weather(request):
         # Poll 모델에서 가져오기
         poll = Poll.objects.first()  # 원한다면 수정 가능
         post = Post.objects.all().order_by('-created_at')[:5]
-        chat = ChatMessage.objects.all().order_by('-timestamp')[:5] 
+        chat = Chat.objects.all().order_by('-timestamp')[:5] 
     
         flag = 'True'  # big icon의 break를 위해
-        flag2 = 'True' # small icon의 break를 위해
-
+        flag2 = 'True' # small icon의 break를 위해       
+        
+        # user 넘기는 거 고민하셈(구현 필요)
         return render(request, 'forecast/landing.html', {
             'message': 'Data fetched and saved successfully!',
             'organized_items': organized_items,

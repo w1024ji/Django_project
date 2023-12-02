@@ -1,0 +1,134 @@
+@font-face {
+    font-family: "YOONCHILDFUNDKOREADAEHAN";
+    src: url("../../fonts/YOONCHILDFUNDKOREADAEHAN.TTF") format("woff2");
+}
+@font-face {
+    font-family: "YOONCHILDFUNDKOREAMANSEH";
+    src: url("../../fonts/YOONCHILDFUNDKOREAMANSEH.TTF") format("woff2");
+}
+
+body {
+    width: 392px;
+    margin: 0 auto;
+    font-family: YOONCHILDFUNDKOREAMANSEH;
+    background-image: url("../../images/background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.navbar {
+    width: 392px;
+    height: 53px;
+    margin-top: 10px;
+    background-color: none;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.icon {
+    width: 20px;
+    height: 15px;
+}
+
+.logo {
+    width: 66px;
+    height: 24px;
+}
+
+.icon2 {
+    width: 21.996px;
+    height: 21.996px;
+}
+
+.mypage-title {
+    width: 393px;
+    border-bottom: 0.1px solid #000;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mypage-title div {
+    margin-left: 16px;
+    margin-top: 17px;
+    margin-bottom: 16px;
+    color: #314290;
+    font-size: 20px;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+
+.post-card {
+    border-bottom: 0.1px solid #000;
+    display: flex;
+}
+
+.card-icon {
+    margin-left: 20px;
+    margin-right: 15px;
+    margin-top: 17px;
+    margin-bottom: 17px;
+    display: flex;
+    justify-content: center;
+}
+
+.card-icon img {
+  width: 25px;
+  height: 25px;
+}
+
+.card-right {
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+
+.card-title {
+    font-size: 16px;
+}
+
+.card-text {
+    font-size: 14px;
+}
+
+.none-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.none-post {
+    margin-top: 68px;
+    display: flex;
+    align-items: center;
+}
+
+.create-btn {
+    margin-right: 16px;
+    margin-top: 20px;
+    margin-bottom: 16px;
+    display: flex;
+    width: 67px;
+    height: 24px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 32px;
+    background: #E2C72C;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: #FFF;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 400;
+}

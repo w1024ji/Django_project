@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
-
+from post.models import Post
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
 
 
 # Create your views here.
@@ -92,3 +94,32 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+#@login_required
+def mypage(request):
+
+    return render(request, 'user/mypage.html')
+# @login_required
+# def my_postList(request):
+#     username=request.user.username
+#     user_posts = Post.objects.filter(author=request.user)
+#     return render(request, 'user/my_post_list.html', {'username': username})
+
+
+
+
+class MyPostsListView(LoginRequiredMixin, ListView):
+    model = Post
+    template_name = 'user/my_post_list.html'  # 적절한 템플릿 이름으로 변경하세요.
+    context_object_name = 'posts'
+    ordering = ['-created_at']
+
+    def get_queryset(self):
+        # 현재 로그인한 사용자의 게시글만 필터링
+        return Post.objects.filter(author=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # 현재 로그인한 사용자의 username을 context에 추가
+        context['username'] = self.request.user.username
+        return context

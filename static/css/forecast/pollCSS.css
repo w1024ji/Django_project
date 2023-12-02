@@ -47,13 +47,14 @@
 }
 
 .chart {
+  cursor : pointer;
   height: 20px;
   background-color: #707887a7; /* Color A - Default color */
   transition: width 0.5s, background-color 0.5s; /* Add transition for a smoother effect */
   border-radius: 8px;
 }
   
-.choice.selected .chart {
+#choice-selected {
   background-color: #f0d32dcd; /* Color B - Color after selected */
 }
   

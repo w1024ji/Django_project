@@ -1,11 +1,40 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>post_update_form</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/post/post_form.css' %}">
+    <title>post_form</title>
 </head>
 <body>
-    
+    <!-- Nav Bar -->
+    <div class="navbar">
+        <a href="{% url 'post' %}"><img src="{% static 'images/arrow.png' %}" class="icon" alt="이전버튼"></a>
+        <a href="{% url 'fetch_and_save_weather' %}"><img src="{% static 'images/logo.png' %}" class="logo" alt="로고"></a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'mypage' %}"><img src="{% static 'images/profile.png' %}" class="icon2" alt="마이페이지"></a>
+        {% else %}
+        <a href="{% url 'login' %}"><img src="{% static 'images/login.png' %}" class="icon2" alt="로그인"></a>
+        {% endif %}
+    </div>
+    <div class="author"><b>{{user.username}}</b>의 날씨 일기</div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="diary">
+            <div class="diary-top">
+                <div class="diary-date">{{ form.created_at }}</div>
+                <div>날씨: {{form.weather}}</div>
+            </div>
+            <div class="diary-img">{{form.head_image}}</div>
+            <div class="diary-title">제목: {{form.title}}</div> 
+        </div>
+        <div class="diary-content-container">
+            <div class="diary-content-box">
+                {{form.content}}
+            </div>
+        </div>
+        <div class="author-box"><button type="submit" class="create-btn">수정 완료</button></div>
+    </form>
 </body>
 </html>
