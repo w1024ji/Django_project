@@ -51,8 +51,7 @@ def fetch_and_save_weather(request):
         'ny': 128,
     }
     
-    import time
-    # services.py의 get_seather_data()를 가져와 딕셔너리 형태로 받기
+    # services.py의 get_weather_data()를 가져와 딕셔너리 형태로 받기
     response = get_weather_data(api_url, api_key, params)
 
     if response and 'response' in response and 'body' in response['response']:
@@ -98,15 +97,13 @@ def fetch_and_save_weather(request):
             earliest_date = {
                 'date_time': earliest_date_key,
                 'categories': earliest_date_categories,
-            }
-            
+            }      
 
         # Poll 모델에서 가져오기
         poll = Poll.objects.first()  # 원한다면 수정 가능
         post = Post.objects.all().order_by('-created_at')[:5]
         chat = ChatMessage.objects.all().order_by('-timestamp')[:5]        
         
-        # user 넘기는 거 고민하셈(구현 필요)
         return render(request, 'forecast/landing.html', {
             'message': 'Data fetched and saved successfully!',
             'organized_items': organized_items,

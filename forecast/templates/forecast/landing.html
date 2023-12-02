@@ -39,27 +39,33 @@
         
         <!--메인 애니메이션-->
         <div class="fcst_main_icon" id="main_icon">
+          
           {% for category in earliest_date.categories %}
           <!--강수량이 있다면 (비 or 눈)-->
             {% if category.category == 'PTY' %}
               {% if category.fcstValue == '1' or category.fcstValue == '2' or  category.fcstValue == '5' or category.fcstValue == '6' %}
-                {% generate_lottie_animation 'rainy' 'rainy-animation' %}
+                {% with flag=1 %}
+                  {% generate_lottie_animation 'rainy' 'rainy-animation' %} 
+                {% endwith %}
               {% elif category.fcstValue == '3' or category.fcstValue == '7' %}
-                {% generate_lottie_animation 'snowy' 'snowy-animation' %}
+                {% with flag=1 %}
+                  {% generate_lottie_animation 'snowy' 'snowy-animation' %} 
+                {% endwith %}
               {% endif %}
             {% endif %}
 
             <!--강수량이 없을 때 (맑음 or 약간 흐림 or 흐림)-->
-            {% if category.category == 'SKY' %}
-              {% if category.fcstValue == '1' %}
-                {% generate_lottie_animation 'sunny' 'sunny-animation' %}
-              {% elif category.fcstValue == '3' %}
-                {% generate_lottie_animation 'little-cloudy' 'little-cloudy-animation' %}
-              {% elif category.fcstValue == '4' %}
-                {% generate_lottie_animation 'cloudy' 'cloudy-animation' %}
+            {% if flag != 1 %}
+              {% if category.category == 'SKY' %}
+                {% if category.fcstValue == '1' %}
+                  {% generate_lottie_animation 'sunny' 'sunny-animation' %}
+                {% elif category.fcstValue == '3' %}
+                  {% generate_lottie_animation 'little-cloudy' 'little-cloudy-animation' %}
+                {% elif category.fcstValue == '4' %}
+                  {% generate_lottie_animation 'cloudy' 'cloudy-animation' %}
+                {% endif %}
               {% endif %}
             {% endif %}
-
           {% endfor %}
         </div> 
 
@@ -110,6 +116,28 @@
           <div class="fcst_box_mini">
               <div class="fcst_time">{{ datetime|slice:"-4:-2" }}시</div>  
               {% for category in categories %}
+
+                <!--강수량이 있다면 (비 or 눈)-->
+                {% if category.category == 'PTY' %}
+                  {% if category.fcstValue == '1' or category.fcstValue == '2' or  category.fcstValue == '5' or category.fcstValue == '6' %}
+                    {% with flag2=2 %}
+                      <div id="mini_rainy_{{ forloop.parentloop.counter }}_{{ forloop.counter }}" style="width: 50px; height: 50px;"></div>
+                      <script>
+                          loadLottieAnimation("{% static 'animations/rainy.json' %}", 'mini_rainy_{{ forloop.parentloop.counter }}_{{ forloop.counter }}');
+                      </script> 
+                    {% endwith %}
+                  {% elif category.fcstValue == '3' or category.fcstValue == '7' %}
+                    {% with flag2=2 %}
+                      <div id="mini_snowy_{{ forloop.parentloop.counter }}_{{ forloop.counter }}" style="width: 50px; height: 50px;"></div>
+                      <script>
+                          loadLottieAnimation("{% static 'animations/snowy.json' %}", 'mini_snowy_{{ forloop.parentloop.counter }}_{{ forloop.counter }}');
+                      </script> 
+                    {% endwith %}
+                  {% endif %}
+                {% endif %}
+
+
+                {% if flag2 != 2 %}
                   {% if category.category == 'SKY' %}
                       {% if category.fcstValue == '1' %}
                           <div id="mini_sunny_{{ forloop.parentloop.counter }}_{{ forloop.counter }}" style="width: 50px; height: 50px;"></div>
@@ -128,6 +156,7 @@
                           </script>
                       {% endif %}
                   {% endif %}
+                {% endif %}
               {% endfor %}
               {% for category in categories %}
                   {% if category.category == 'T1H' %}
