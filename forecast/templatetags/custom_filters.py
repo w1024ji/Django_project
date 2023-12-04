@@ -4,6 +4,8 @@ from django.conf import settings
 
 register = template.Library()
 
+# 
+
 @register.simple_tag
 def generate_lottie_animation(animation_name, container_id):
     json_path = f"{settings.STATIC_URL}animations/{animation_name}.json"
