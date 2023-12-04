@@ -105,7 +105,7 @@ def fetch_and_save_weather(request):
         chat = Chat.objects.all().order_by('-timestamp')[:5] 
     
         flag = 'True'  # big icon의 break를 위해
-        flag2 = 'True' # small icon의 break를 위해       
+        flag2 = 'True' # small icon의 break를 위해 
         
         # user 넘기는 거 고민하셈(구현 필요)
         return render(request, 'forecast/landing.html', {

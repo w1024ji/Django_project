@@ -47,10 +47,10 @@
             {% if category.category == 'PTY' %}
               {% if category.fcstValue == '1' or category.fcstValue == '2' or  category.fcstValue == '5' or category.fcstValue == '6' %}
                   {% generate_lottie_animation 'rainy' 'rainy-animation' %} 
-                  {% change_flag flag as flag %}
+                  {% change_flag_to_False flag as flag %}
               {% elif category.fcstValue == '3' or category.fcstValue == '7' %}
                   {% generate_lottie_animation 'snowy' 'snowy-animation' %} 
-                  {% change_flag flag as flag %}
+                  {% change_flag_to_False flag as flag %}
               {% endif %}
             {% endif %}
 
@@ -118,21 +118,21 @@
           <div class="fcst_box_mini">
               <div class="fcst_time">{{ datetime|slice:"-4:-2" }}시</div>  
               {% for category in categories %}
-
                 <!--강수량이 있다면 (비 or 눈)-->
                 {% if category.category == 'PTY' %}
+                {% change_flag_to_True flag2 as flag2 %}
                   {% if category.fcstValue == '1' or category.fcstValue == '2' or  category.fcstValue == '5' or category.fcstValue == '6' %}
                       <div id="mini_rainy_{{ forloop.parentloop.counter }}_{{ forloop.counter }}" style="width: 50px; height: 50px;"></div>
                       <script>
                           loadLottieAnimation("{% static 'animations/rainy.json' %}", 'mini_rainy_{{ forloop.parentloop.counter }}_{{ forloop.counter }}');
                       </script> 
-                      {% change_flag flag2 as flag2 %}
+                      {% change_flag_to_False flag2 as flag2 %}
                   {% elif category.fcstValue == '3' or category.fcstValue == '7' %}
                       <div id="mini_snowy_{{ forloop.parentloop.counter }}_{{ forloop.counter }}" style="width: 50px; height: 50px;"></div>
                       <script>
                           loadLottieAnimation("{% static 'animations/snowy.json' %}", 'mini_snowy_{{ forloop.parentloop.counter }}_{{ forloop.counter }}');
                       </script> 
-                      {% change_flag flag2 as flag2 %}
+                      {% change_flag_to_False flag2 as flag2 %}
                   {% endif %}
                 {% endif %}
 
